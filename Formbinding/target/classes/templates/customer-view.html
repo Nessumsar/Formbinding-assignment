@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="css/css.css"/>
+    <title>Customers</title>
+</head>
+<body>
+ <nav th:replace="navbar :: Navbar"></nav>
+    <div class="container">
+                    <form th:action="@{/customers}">
+                        <input type="hidden" id="type" name="type" value="email"/>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="value" name="value" placeholder="Enter email">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-sm">Search</button>
+                    </form>
+                    <form class="findAll" th:action="@{/customers}">
+                        <input type="hidden" name="type" value="all"/>
+                        <input type="hidden" name="value" value=""/>
+                        <button type="submit" class="btn btn-info btn-sm">Get all</button>
+                    </form>
+        <div th:if="${customerList}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Registration date</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <tr th:each="cust: ${customerList}">
+                    <td><span th:text="${cust.email}"></span></td>
+                    <td><span th:text="${cust.regDate}"></span></td>
+                    <td><span th:text="${cust.isActive()}"></span></td>
+                    <td><a class="btn btn-primary btn-sm"th:href="@{customers/find(id=${cust.customerId})}">DETAILS</a></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${message}">
+            <p th:text="${message}"></p>
+        </div>
+        <div th:if="${customer}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">Email</th>
+                        <th scope="col">Registration date</th>
+                        <th scope="col">Active</th>
+                        <th scope="col">ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span th:text="${customer.email}"></span></td>
+                        <td><span th:text="${customer.regDate}"></span></td>
+                        <td><span th:text="${customer.isActive()}"></span></td>
+                        <td><a class="btn btn-primary btn-sm"th:href="@{customers/find(id=${customer.customerId})}">DETAILS</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+

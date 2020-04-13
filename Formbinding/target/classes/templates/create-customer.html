@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <link rel="stylesheet" href="css/css.css">
+    <title>Create customer</title>
+</head>
+<body>
+    <nav th:replace="navbar :: Navbar"></nav>
+    <div class="container">
+        <form th:action="@{/customers/process}" method="post" th:object="${form}">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input class="form-control" type="email" id="email" th:field="*{email}" >
+            </div>
+            <div th:if="${#fields.hasErrors('email')}">
+                <ul>
+                    <li th:each="err: ${#fields.errors('email')}">
+                        <span th:text="${err}"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="street">Address</label>
+                <input class="form-control" type="text" id="street" th:field="*{street}">
+            </div>
+            <div th:if="${#fields.hasErrors('street')}">
+                <ul>
+                    <li th:each="err: ${#fields.errors('street')}">
+                       <span th:text="${err}"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="form-group">
+                <label for="zipCode">ZIP Code</label>
+                <input class="form-control" type="text" id="zipCode" th:field="*{zipCode}">
+            </div>
+            <div th:if="${#fields.hasErrors('zipCode')}">
+                <li th:each="err: ${#fields.errors('zipCode')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </div>
+            <div class="form-group">
+                <label for="city">City</label>
+                <input class="form-control" type="text" id="city" th:field="*{city}">
+            </div>
+            <div th:if="${#fields.hasErrors('city')}">
+                <li th:each="err: ${#fields.errors('city')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </div>
+            <div class="form-group">
+                <label for="homePhone">Home phone</label>
+                <input class="form-control" type="text" id="homePhone" th:field="*{homePhone}">
+            </div>
+            <div th:if="${#fields.hasErrors('homePhone')}">
+                <li th:each="err: ${#fields.errors('homePhone')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </div>
+            <div class="form-group">
+                <label for="cellPhone">Cell phone</label>
+                <input class="form-control" type="text" id="cellPhone" th:field="*{cellPhone}">
+            </div>
+            <div th:if="${#fields.hasErrors('cellPhone')}">
+                <li th:each="err: ${#fields.errors('cellPhone')}">
+                    <span th:text="${err}"></span>
+                </li>
+            </div>
+            <button class="btn btn-primary btn-sm" type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>
+
+

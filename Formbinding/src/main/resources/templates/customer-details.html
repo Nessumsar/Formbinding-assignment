@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <title>Details</title>
+</head>
+<body>
+    <nav th:replace="navbar :: Navbar"></nav>
+    <div class="container">
+        <div th:if="${customer.customerDetails}">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Address</th>
+                        <th>ZIP code</th>
+                        <th>City</th>
+                        <th>Home phone</th>
+                        <th>Cell Phone</th>
+                        <th>ACTION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span th:text="${customer.customerDetails.street}"></span></td>
+                        <td><span th:text="${customer.customerDetails.zipCode}"></span></td>
+                        <td><span th:text="${customer.customerDetails.city}"></span></td>
+                        <td><span th:text="${customer.customerDetails.homePhone}"></span></td>
+                        <td><span th:text="${customer.customerDetails.cellPhone}"></span></td>
+                        <td>
+                            <form th:action="@{/delete}" method="post">
+                                <input type="hidden" name="id" id="id" th:value="${customer.customerId}">
+                                <input class="btn btn-danger btn-sm" type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
